@@ -1,1 +1,16 @@
-.envecho .env.*echo !.env.exampleecho __pycache__/echo *.py[cod]echo *.egg-info/echo venv/echo .venv/echo node_modules/echo .next/echo dist/echo build/echo *.dbecho *.sqlite3echo .cache/echo .DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+node_modules/
+.next/
+dist/
+build/
+*.db
+*.sqlite3
+.cache/
+.DS_Store
