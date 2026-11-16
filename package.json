@@ -1,0 +1,13 @@
+{
+  "name": "nikitha-ai",
+  "version": "1.0.0",
+  "description": "NIKITHA.AI - Your Personal AI. Beyond Assistance.",
+  "scripts": {
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:build": "npm --prefix frontend run build",
+    "frontend:start": "npm --prefix frontend run start"
+  },
+  "keywords": ["ai", "assistant", "jarvis", "automation", "personal-ai"],
+  "author": "Nikitha (nikitha14-dotcom)",
+  "license": "MIT"
+}
