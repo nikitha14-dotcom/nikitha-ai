@@ -14,11 +14,10 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login", auto_error=False)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    try:
-        return pwd_context.verify(plain_password, hashed_password)
-    except Exception:
-        # Fallback for plain text in dev mode
-        return plain_password == hashed_password
+    """Return True only if the bcrypt hash matches the plain password.
+    No plaintext fallback is allowed – insecure for production.
+    """
+    return pwd_context.verify(plain_password, hashed_password)
 
 def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
@@ -39,10 +38,8 @@ async def get_current_user_optional(
 ):
     from backend.app.models.user import User
     if not token:
-        # Default active user profile for immediate seamless development/desktop experience
-        result = await db.execute(select(User).limit(1))
-        user = result.scalars().first()
-        return user
+        # No token – treat as unauthenticated
+        return None
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         username: str = payload.get("sub")
